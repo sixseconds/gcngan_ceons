@@ -1,0 +1,116 @@
+nodes:
+- {name: 0, regenerators: 100, location: Seattle, xcoordinate: 32, ycoordinate: 57, class: ca.bcit.net.NetworkNode}
+- {name: 1, regenerators: 100, location: Los Angeles, xcoordinate: 104, ycoordinate: 378, class: ca.bcit.net.NetworkNode}
+- {name: 2, regenerators: 100, location: San Francisco, xcoordinate: 30, ycoordinate: 298, class: ca.bcit.net.NetworkNode}
+- {name: 3, regenerators: 100, location: Las Vegas, xcoordinate: 158, ycoordinate: 331, class: ca.bcit.net.NetworkNode}
+- {name: 4, regenerators: 100, location: Salt Lake City, xcoordinate: 216, ycoordinate: 227, class: ca.bcit.net.NetworkNode}
+- {name: 5, regenerators: 100, location: El Paso, xcoordinate: 313, ycoordinate: 427, class: ca.bcit.net.NetworkNode}
+- {name: 6, regenerators: 100, location: Dallas, xcoordinate: 486, ycoordinate: 406, class: ca.bcit.net.NetworkNode}
+- {name: 7, regenerators: 100, location: Houston, xcoordinate: 510, ycoordinate: 467, class: ca.bcit.net.NetworkNode}
+- {name: 8, regenerators: 100, location: Tulsa, xcoordinate: 499, ycoordinate: 331, class: ca.bcit.net.NetworkNode}
+- {name: 9, regenerators: 100, location: Minneapolis, xcoordinate: 548, ycoordinate: 125, class: ca.bcit.net.NetworkNode}
+- {name: 10, regenerators: 100, location: Kansas City, xcoordinate: 524, ycoordinate: 267, class: ca.bcit.net.NetworkNode}
+- {name: 11, regenerators: 100, location: Denver, xcoordinate: 339, ycoordinate: 252, class: ca.bcit.net.NetworkNode}
+- {name: 12, regenerators: 100, location: Chicago, xcoordinate: 648, ycoordinate: 201, class: ca.bcit.net.NetworkNode}
+- {name: 13, regenerators: 100, location: Indianapolis, xcoordinate: 673, ycoordinate: 250, class: ca.bcit.net.NetworkNode}
+- {name: 14, regenerators: 100, location: Detroit, xcoordinate: 729, ycoordinate: 189, class: ca.bcit.net.NetworkNode}
+- {name: 15, regenerators: 100, location: St Louis, xcoordinate: 602, ycoordinate: 277, class: ca.bcit.net.NetworkNode}
+- {name: 16, regenerators: 100, location: Nashville, xcoordinate: 663, ycoordinate: 331, class: ca.bcit.net.NetworkNode}
+- {name: 17, regenerators: 100, location: Cleveland, xcoordinate: 754, ycoordinate: 212, class: ca.bcit.net.NetworkNode}
+- {name: 18, regenerators: 100, location: New York, xcoordinate: 890, ycoordinate: 229, class: ca.bcit.net.NetworkNode}
+- {name: 19, regenerators: 100, location: Albany, xcoordinate: 896, ycoordinate: 183, class: ca.bcit.net.NetworkNode}
+- {name: 20, regenerators: 100, location: Charlotte, xcoordinate: 768, ycoordinate: 352, class: ca.bcit.net.NetworkNode}
+- {name: 21, regenerators: 100, location: New Orleans, xcoordinate: 604, ycoordinate: 464, class: ca.bcit.net.NetworkNode}
+- {name: 22, regenerators: 100, location: Boston, xcoordinate: 943, ycoordinate: 190, class: ca.bcit.net.NetworkNode}
+- {name: 23, regenerators: 100, location: Atlanta, xcoordinate: 706, ycoordinate: 385, class: ca.bcit.net.NetworkNode}
+- {name: 24, regenerators: 100, location: Miami, xcoordinate: 779, ycoordinate: 547, class: ca.bcit.net.NetworkNode}
+- {name: 25, regenerators: 100, location: 'Washington, D.C', xcoordinate: 837, ycoordinate: 272, class: ca.bcit.net.NetworkNode}
+groups:
+  replicas: [1, 2, 7, 12, 18, 23, 25]
+  international: [2, 18, 24]
+links:
+  ? !!python/tuple [0, 4]
+  : {length: 1391, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [9, 12]
+  : {length: 702, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [2, 1]
+  : {length: 684, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [4, 3]
+  : {length: 763, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [0, 2]
+  : {length: 1375, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [2, 4]
+  : {length: 1209, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [6, 8]
+  : {length: 481, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [6, 7]
+  : {length: 440, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [10, 15]
+  : {length: 478, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [21, 24]
+  : {length: 1327, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [14, 17]
+  : {length: 188, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [21, 23]
+  : {length: 853, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [12, 14]
+  : {length: 507, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [12, 13]
+  : {length: 367, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [23, 24]
+  : {length: 1203, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [15, 13]
+  : {length: 462, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [15, 12]
+  : {length: 523, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [16, 23]
+  : {length: 430, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [16, 20]
+  : {length: 665, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [18, 22]
+  : {length: 374, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [1, 5]
+  : {length: 1415, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [8, 10]
+  : {length: 454, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [7, 21]
+  : {length: 646, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [1, 3]
+  : {length: 477, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [3, 5]
+  : {length: 1177, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [5, 7]
+  : {length: 1349, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [4, 11]
+  : {length: 770, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [5, 6]
+  : {length: 1135, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [8, 15]
+  : {length: 723, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [11, 6]
+  : {length: 1320, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [20, 25]
+  : {length: 667, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [6, 16]
+  : {length: 1257, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [13, 17]
+  : {length: 552, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [25, 18]
+  : {length: 430, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [20, 23]
+  : {length: 457, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [17, 19]
+  : {length: 834, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [11, 10]
+  : {length: 1093, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [19, 18]
+  : {length: 293, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [16, 13]
+  : {length: 496, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [17, 25]
+  : {length: 618, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [10, 9]
+  : {length: 816, class: ca.bcit.net.NetworkLink}
+  ? !!python/tuple [19, 22]
+  : {length: 290, class: ca.bcit.net.NetworkLink}
+class: ca.bcit.net.Network
