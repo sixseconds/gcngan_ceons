@@ -8,6 +8,11 @@ import tensorflow as tf
 import numpy as np
 import networkx as nx
 
+import json
+import os
+import sys
+
+
 import yaml
 
 from node import Node
@@ -17,39 +22,68 @@ loader = yaml.Loader
 
 topology = nx.Graph()
 
-with open("./topology.yml") as file:
+with open("../Yml/topology.yml") as file:
     data = yaml.load(file, Loader=loader)
     nodes = [
         # Node(node["location"], node["xcoordinate"], node["ycoordinate"])
         node["name"]
         for node in data["nodes"]
     ]
-    locations = [node["location"] for node in data["nodes"]]
+
     # print(nodes)
     topology.add_nodes_from(nodes)
-    for node in topology.nodes():
-        topology.nodes[node]["location"] = locations[node]
-
-    print(topology.nodes())
-
-    DCS = []
-    for group, members in data["groups"].items():
-        DCS.extend(members)
+    for node in nodes:
+        topology.nodes[node]["volTTL"] = 0
 
     # print(topology.nodes())
-    for dc in DCS:
-        topology.nodes[dc]["cpu"] = 8
-        topology.nodes[dc]["ram"] = 8
-        topology.nodes[dc]["storage"] = 8
 
-    print(topology.nodes(data=True))
-
-    links = [(key[0], key[1]) for key in list(data["links"].keys())]
+    # print(data["links"])
+    links = [key for key in list(data["links"].keys())]
     # print(links)
     topology.add_edges_from(links)
-    # print(len(topology.edges()))
-    adj = nx.adjacency_matrix(topology)
-    identity = np.identity(26)
-    a_ca = adj + identity
+    for link in links:
+        topology[link[0]][link[1]]["weight"] = data["links"][link]["length"]
 
-    print(nx.normalized_laplacian_matrix(topology).A)
+    # adj = nx.adjacency_matrix(topology)
+    # identity = np.identity(26)
+    # a_ca = adj + identity
+
+    # print(nx.normalized_laplacian_matrix(topology).A)
+
+    def calc_weight(source, destination, edge):
+        source_vol_ttl = topology.nodes[source].get("volTTL")
+        destination_vol_ttl = topology.nodes[destination].get("volTTL")
+        edge_length = edge.get("weight")
+
+        return (source_vol_ttl + destination_vol_ttl) * edge_length
+
+    with open(
+        f"../Test_Data/From_Liam/REAL-DATA-1/US26_2019_11_14_16_22_52_demands.json"
+    ) as file:
+        data = json.load(file)
+        demands = [key[list(key.keys())[0]] for key in data]
+
+        batch = []
+        for tick in range(180):
+            demand = demands[tick + 3000]
+            demand["initialttl"] -= 180 - tick
+            if demand["initialttl"] > 0:
+                batch.append(demand)
+
+        parsed = []
+        for demand in batch:
+            erl = demand["initialttl"] * demand["volume"]
+
+            if "source" in demand:
+                shortest_path = nx.dijkstra_path(
+                    topology, demand["source"]["name"], demand["destination"]["name"], weight=calc_weight
+                )
+
+                for node in shortest_path:
+                    topology.nodes[node]["volTTL"] += erl
+            # else:
+            #     for node in nodes:
+            #         nodes[node] += erl
+
+        print(topology.nodes(data=True))
+
