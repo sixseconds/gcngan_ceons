@@ -22,7 +22,7 @@ loader = yaml.Loader
 
 topology = nx.Graph()
 
-LABEL = '1000_erlang'
+LABEL_END = '_erlang'
 
 with open("../Yml/topology.yml") as file:
     data = yaml.load(file, Loader=loader)
@@ -97,10 +97,25 @@ with open("../Yml/topology.yml") as file:
 
         with open("featureLabelData.content", "w") as file:
             for node in topology.nodes(data=True):
-                file.write("{} {} {}\n".format(node[0][5:], node[1]['volTTL'], LABEL))
+                if node[1]['volTTL'] > 2500000:
+                    erl = '1000'
+                elif node[1]['volTTL'] > 2000000:
+                    erl = '900'
+                elif node[1]['volTTL'] > 1500000:
+                    erl = '800' 
+                elif node[1]['volTTL'] > 1000000:
+                    erl = '700' 
+                elif node[1]['volTTL'] > 950000:
+                    erl = '600'
+                elif node[1]['volTTL'] > 900000:
+                    erl = '500'
+                elif node[1]['volTTL'] > 850000:
+                    erl = '400'
+                else:
+                    erl = '300'     
+                file.write("{} {} {}\n".format(node[0][5:], node[1]['volTTL'], (erl + LABEL_END)))
 
         with open("edges.cites", "w") as file:
             for edge in topology.edges:
-                
                 file.write("{} {}\n".format(edge[0][5:], edge[1]))
 
