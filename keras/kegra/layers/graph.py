@@ -22,7 +22,7 @@ class GraphConvolution(Layer):
         if 'input_shape' not in kwargs and 'input_dim' in kwargs:
             kwargs['input_shape'] = (kwargs.pop('input_dim'),)
         super(GraphConvolution, self).__init__(**kwargs)
-        print("building graph")
+        # print("building graph")
         self.units = units
         self.activation = activations.get(activation)
         self.use_bias = use_bias
