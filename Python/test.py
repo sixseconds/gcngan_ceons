@@ -22,7 +22,7 @@ loader = yaml.Loader
 
 topology = nx.Graph()
 
-LABEL_END = '_erlang'
+LABEL_END = "_erlang"
 
 with open("../Yml/topology.yml") as file:
     data = yaml.load(file, Loader=loader)
@@ -78,7 +78,10 @@ with open("../Yml/topology.yml") as file:
 
             if "source" in demand:
                 shortest_path = nx.dijkstra_path(
-                    topology, demand["source"]["name"], demand["destination"]["name"], weight=calc_weight
+                    topology,
+                    demand["source"]["name"],
+                    demand["destination"]["name"],
+                    weight=calc_weight,
                 )
 
                 for node in shortest_path:
@@ -95,27 +98,18 @@ with open("../Yml/topology.yml") as file:
         # for edge in topology.edges:
         #     print(edge)
 
-        with open("featureLabelData.content", "w") as file:
-            for node in topology.nodes(data=True):
-                if node[1]['volTTL'] > 2500000:
-                    erl = '1000'
-                elif node[1]['volTTL'] > 2000000:
-                    erl = '900'
-                elif node[1]['volTTL'] > 1500000:
-                    erl = '800' 
-                elif node[1]['volTTL'] > 1000000:
-                    erl = '700' 
-                elif node[1]['volTTL'] > 950000:
-                    erl = '600'
-                elif node[1]['volTTL'] > 900000:
-                    erl = '500'
-                elif node[1]['volTTL'] > 850000:
-                    erl = '400'
-                else:
-                    erl = '300'     
-                file.write("{} {} {}\n".format(node[0][5:], node[1]['volTTL'], (erl + LABEL_END)))
-
-        with open("edges.cites", "w") as file:
+        with open(f"data\edge_data.txt", "w") as file:
             for edge in topology.edges:
-                file.write("{} {}\n".format(edge[0][5:], edge[1]))
+                data_line = " ".join(
+                    [
+                        *edge,
+                        str(
+                            topology.nodes[edge[0]].get("volTTL")
+                            + topology.nodes[edge[1]].get("volTTL")
+                        ),
+                    ]
+                )
+
+                print(data_line)
+                file.write(f"{data_line}\n")
 
