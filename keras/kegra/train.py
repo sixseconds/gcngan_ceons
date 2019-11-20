@@ -4,6 +4,7 @@ from keras.layers import Input, Dropout
 from keras.models import Model
 from keras.optimizers import Adam
 from keras.regularizers import l2
+from keras.utils import to_categorical
 
 from kegra.layers.graph import GraphConvolution
 from kegra.utils import *
@@ -11,7 +12,7 @@ from kegra.utils import *
 import time
 
 # Define parameters
-DATASET = 'cora'
+DATASET = 'network'
 FILTER = 'chebyshev'
 MAX_DEGREE = 2  # maximum polynomial degree
 SYM_NORM = True  # symmetric (True) vs. left-only (False) normalization
@@ -71,10 +72,21 @@ for epoch in range(1, NB_EPOCH+1):
     # Log wall-clock time
     t = time.time()
     
-    # graph = np.asarray(graph[0], dtype="float32")
-    # print(type(graph))
-    # print(str(graph))
     # Single training iteration (we mask nodes without labels for loss calculation)
+    # print(graph)
+    # print(y_train)
+    # graph[0] = to_categorical(graph[0], num_classes=0, dtype='int32')
+    # count = 0
+    # for array in graph:
+    #     for line in array:
+    #         print(line)
+    #         count += 1
+    #         if count > 2:
+    #             break
+    print(graph[0])
+    # print(graph[1])
+    # print(graph[2])
+    # print(graph[3])
     model.fit(graph, y_train, sample_weight=train_mask,
               batch_size=A.shape[0], epochs=1, shuffle=False, verbose=0)
 

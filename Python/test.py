@@ -22,6 +22,8 @@ loader = yaml.Loader
 
 topology = nx.Graph()
 
+LABEL = '1000_erlang'
+
 with open("../Yml/topology.yml") as file:
     data = yaml.load(file, Loader=loader)
     nodes = [
@@ -85,5 +87,19 @@ with open("../Yml/topology.yml") as file:
             #     for node in nodes:
             #         nodes[node] += erl
 
-        print(topology.nodes(data=True))
+        # print(topology.nodes(data=True))
+        # for node in topology.nodes(data=True):
+        #     print(node[0])
+        #     print(node[1]['volTTL'])
+
+        # for edge in topology.edges:
+        #     print(edge)
+
+        with open("featureLabelData.content", "w") as file:
+            for node in topology.nodes(data=True):
+                file.write("{} {} {}\n".format(node[0][5:], node[1]['volTTL'], LABEL))
+
+        with open("edges.cites", "w") as file:
+            for edge in topology.edges:
+                file.write("{} {}\n".format(edge[0][5:], edge[1]))
 
