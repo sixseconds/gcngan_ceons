@@ -101,5 +101,6 @@ with open("../Yml/topology.yml") as file:
 
         with open("edges.cites", "w") as file:
             for edge in topology.edges:
+                
                 file.write("{} {}\n".format(edge[0][5:], edge[1]))
 
