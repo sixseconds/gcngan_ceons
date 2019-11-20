@@ -83,7 +83,7 @@ for epoch in range(1, NB_EPOCH+1):
     #         count += 1
     #         if count > 2:
     #             break
-    print(graph[0])
+    # print(graph[0])
     # print(graph[1])
     # print(graph[2])
     # print(graph[3])
