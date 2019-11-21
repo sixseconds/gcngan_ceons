@@ -105,12 +105,8 @@ with open("../Yml/topology.yml") as file:
                     erl = '800' 
                 elif node[1]['volTTL'] > 1000000:
                     erl = '700' 
-                elif node[1]['volTTL'] > 950000:
+                elif node[1]['volTTL'] > 500000:
                     erl = '600'
-                elif node[1]['volTTL'] > 900000:
-                    erl = '500'
-                elif node[1]['volTTL'] > 850000:
-                    erl = '400'
                 else:
                     erl = '300'     
                 file.write("{} {} {}\n".format(node[0][5:], node[1]['volTTL'], (erl + LABEL_END)))
