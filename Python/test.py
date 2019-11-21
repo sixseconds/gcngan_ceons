@@ -98,9 +98,10 @@ with open("../Yml/topology.yml") as file:
                         
 
                 with open(f"data\erlang_{erlang}\edge_list_{tick}.txt", "w") as file:
-                    for nbr, length_dict in data_dict.items():
-                    data_line = " ".join([str(node)[5::], str(nbr)[5::], str(
-                            topology.nodes[node].get("volTTL")
-                            + topology.nodes[nbr].get("volTTL")
-                        )])
-                        file.write(f"{data_line}\n")
+                    for node, data_dict in topology.adj.items():
+                        for nbr, length_dict in data_dict.items():
+                            data_line = " ".join([str(node)[5::], str(nbr)[5::], str(
+                                    topology.nodes[node].get("volTTL")
+                                    + topology.nodes[nbr].get("volTTL")
+                                )])
+                            file.write(f"{data_line}\n")
