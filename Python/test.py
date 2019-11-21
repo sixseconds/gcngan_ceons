@@ -27,21 +27,19 @@ LABEL_END = "_erlang"
 with open("../Yml/topology.yml") as file:
     data = yaml.load(file, Loader=loader)
     nodes = [
-        # Node(node["location"], node["xcoordinate"], node["ycoordinate"])
+        
         node["name"]
         for node in data["nodes"]
     ]
 
-    # print(nodes)
+    
     topology.add_nodes_from(nodes)
     for node in nodes:
         topology.nodes[node]["volTTL"] = 0
 
-    # print(topology.nodes())
-
-    # print(data["links"])
+    
     links = [key for key in list(data["links"].keys())]
-    # print(links)
+    
     topology.add_edges_from(links)
     for link in links:
         topology[link[0]][link[1]]["weight"] = data["links"][link]["length"]
@@ -86,30 +84,16 @@ with open("../Yml/topology.yml") as file:
 
                 for node in shortest_path:
                     topology.nodes[node]["volTTL"] += erl
-            # else:
-            #     for node in nodes:
-            #         nodes[node] += erl
 
-        # print(topology.nodes(data=True))
-        # for node in topology.nodes(data=True):
-        #     print(node[0])
-        #     print(node[1]['volTTL'])
-
-        # for edge in topology.edges:
-        #     print(edge)
+        # print(topology.adj)
 
         with open(f"data\edge_data.txt", "w") as file:
-            for edge in topology.edges:
-                data_line = " ".join(
-                    [
-                        *edge,
-                        str(
-                            topology.nodes[edge[0]].get("volTTL")
-                            + topology.nodes[edge[1]].get("volTTL")
-                        ),
-                    ]
-                )
+            for node, data_dict in topology.adj.items():
+                # print(node, data_dict)
+                for nbr, length_dict in data_dict.items():
+                    data_line = " ".join([str(node)[5::], str(nbr)[5::], str(
+                            topology.nodes[node].get("volTTL")
+                            + topology.nodes[nbr].get("volTTL")
+                        )])
 
-                print(data_line)
-                file.write(f"{data_line}\n")
-
+                    print(data_line)
