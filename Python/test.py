@@ -27,21 +27,19 @@ LABEL_END = "_erlang"
 with open("../Yml/topology.yml") as file:
     data = yaml.load(file, Loader=loader)
     nodes = [
-        # Node(node["location"], node["xcoordinate"], node["ycoordinate"])
+        
         node["name"]
         for node in data["nodes"]
     ]
 
-    # print(nodes)
+    
     topology.add_nodes_from(nodes)
     for node in nodes:
         topology.nodes[node]["volTTL"] = 0
 
-    # print(topology.nodes())
-
-    # print(data["links"])
+    
     links = [key for key in list(data["links"].keys())]
-    # print(links)
+    
     topology.add_edges_from(links)
     for link in links:
         topology[link[0]][link[1]]["weight"] = data["links"][link]["length"]
@@ -58,8 +56,7 @@ with open("../Yml/topology.yml") as file:
         edge_length = edge.get("weight")
 
         return (source_vol_ttl + destination_vol_ttl) * edge_length
-
-
+        
     file_list = []
     DATA_PATH = "../Test_Data/From_Liam/REAL-DATA-1"
     for item in os.listdir(DATA_PATH):
@@ -101,15 +98,9 @@ with open("../Yml/topology.yml") as file:
                         
 
                 with open(f"data\erlang_{erlang}\edge_list_{tick}.txt", "w") as file:
-                    for edge in topology.edges:
-                        data_line = " ".join(
-                            [
-                                *edge,
-                                str(
-                                    topology.nodes[edge[0]].get("volTTL")
-                                    + topology.nodes[edge[1]].get("volTTL")
-                                ),
-                            ]
-                        )
+                    for nbr, length_dict in data_dict.items():
+                    data_line = " ".join([str(node)[5::], str(nbr)[5::], str(
+                            topology.nodes[node].get("volTTL")
+                            + topology.nodes[nbr].get("volTTL")
+                        )])
                         file.write(f"{data_line}\n")
-
