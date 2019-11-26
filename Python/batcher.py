@@ -4,7 +4,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 # Install TensorFlow
 
-
 import numpy as np
 import networkx as nx
 
@@ -12,7 +11,7 @@ import json
 import os
 import sys
 
-
+import csv
 import yaml
 
 loader = yaml.Loader
@@ -26,14 +25,14 @@ with open("../Yml/topology.yml") as file:
     nodes = [node["name"] for node in data["nodes"]]
 
     topology.add_nodes_from(nodes)
-    for node in nodes:
-        topology.nodes[node]["volTTL"] = 0
+    # for node in nodes:
+        # topology.nodes[node]["volTTL"] = 0
 
     links = [key for key in list(data["links"].keys())]
 
     topology.add_edges_from(links)
     for link in links:
-        topology[link[0]][link[1]]["weight"] = data["links"][link]["length"]
+        topology[link[0]][link[1]]["length"] = data["links"][link]["length"]
 
     # adj = nx.adjacency_matrix(topology)
     # identity = np.identity(26)
@@ -62,10 +61,15 @@ with open("../Yml/topology.yml") as file:
             data = json.load(file)
             # print(data[0])
             demands = [key[list(key.keys())[0]] for key in data]
+            net_demands = []
             # print(demands)
             for tick in range(555):
+                net_demands.append(demands[tick])
+                
                 for node in topology.nodes:
                     topology.nodes[node]["volTTL"] = 0
+
+                
                 batch = []
                 lower = tick * 180
                 upper = (tick + 1) * 180
@@ -83,6 +87,11 @@ with open("../Yml/topology.yml") as file:
                             demand["destination"]["name"],
                             weight=calc_weight,
                         )
+
+                        for index, node in enumerate(shortest_path)):
+                            if index != len(shortest_path):
+                                
+
 
                         for node in shortest_path:
                             topology.nodes[node]["volTTL"] += erl
