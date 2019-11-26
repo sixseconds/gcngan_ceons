@@ -1,0 +1,20 @@
+{
+  "trafficGeneratorName": "Dedicated Backup",
+  "erlangValue": 600,
+  "seedValue": 7,
+  "alphaValue": 0.0,
+  "demandsCountValue": 100000,
+  "totalVolume": 1.173609E7,
+  "spectrumBlockedVolume": 390500.0,
+  "regeneratorsBlockedVolume": 2864750.0,
+  "linkFailureBlockedVolume": 0.0,
+  "regsPerAllocation": 45108.0,
+  "allocations": 97230.0,
+  "unhandledVolume": 0.0,
+  "noSpectrumBlockedVolumePercentage": 3.3273432633866986,
+  "noRegeneratorsBlockedVolumePercentage": 24.40974805067105,
+  "linkFailureBlockedVolumePercentage": 0.0,
+  "unhandledVolumePercentage": 0.0,
+  "totalBlockedVolumePercentage": 27.73709131405775,
+  "averageRegeneratiorsPerAllocation": 0.4639308855291577
+}
