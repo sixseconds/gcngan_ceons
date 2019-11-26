@@ -1,0 +1,20 @@
+{
+  "trafficGeneratorName": "No Backup",
+  "erlangValue": 700,
+  "seedValue": 48,
+  "alphaValue": 0.0,
+  "demandsCountValue": 100000,
+  "totalVolume": 1.181006E7,
+  "spectrumBlockedVolume": 0.0,
+  "regeneratorsBlockedVolume": 22500.0,
+  "linkFailureBlockedVolume": 0.0,
+  "regsPerAllocation": 131506.0,
+  "allocations": 128928.0,
+  "unhandledVolume": 0.0,
+  "noSpectrumBlockedVolumePercentage": 0.0,
+  "noRegeneratorsBlockedVolumePercentage": 0.19051554352814465,
+  "linkFailureBlockedVolumePercentage": 0.0,
+  "unhandledVolumePercentage": 0.0,
+  "totalBlockedVolumePercentage": 0.19051554352814465,
+  "averageRegeneratiorsPerAllocation": 1.0199956564904442
+}
