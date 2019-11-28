@@ -28,18 +28,12 @@ DATA_FOLDER = "../Test_Data/"
 with open("../Yml/topology.yml") as file:
     data = yaml.load(file, Loader=loader)
     nodes = [node["name"] for node in data["nodes"]]
-
     topology.add_nodes_from(nodes)
-    # for node in nodes:
-    # topology.nodes[node]["volTTL"] = 0
-
     links = [key for key in list(data["links"].keys())]
 
 topology.add_edges_from(links)
 for index, link in enumerate(links):
     topology[link[0]][link[1]]["length"] = data["links"][link]["length"]
-    # topology[link[0]][link[1]]["volTTL"] = 0
-    # print(topology[link[0]][link[1]]["volTTL"])
 
 # print(topology.nodes)
 # print(topology.edges)
@@ -54,69 +48,84 @@ for index, link in enumerate(links):
 def calc_weight(source, destination, edge):
     return edge.get("volTTL") * edge.get("length")
 
-file_name = ''
 
-while file_name != 'q':
-    file_name = input("Burst Pattern:\n(s - single burst, d - double burst, p - plateau)\n")
-    if file_name == 's' or file_name == 'd' or file_name == 'p':
-        break
-    else:
-        print('Please enter s, d, or p')
+# file_name = ""
 
-if file_name == 's':
-    file_name = 'single_burst'
-elif file_name == 'd':
-    file_name = 'double_burst'
-else:
-    file_name = 'plateau'
+# while file_name != "q":
+#     file_name = input(
+#         "Burst Pattern:\n(s - single burst, d - double burst, p - plateau)\n"
+#     )
+#     if file_name == "s" or file_name == "d" or file_name == "p":
+#         break
+#     else:
+#         print("Please enter s, d, or p")
 
-with open(DATA_FOLDER + file_name + '.csv', newline="") as burst_file:
-    demands = csv.reader(burst_file)
-    network_demands = []
-    data_list = -1
-    for index, row in enumerate(demands):
-        for link in links:
-            topology[link[0]][link[1]]["volTTL"] = 1
+# if file_name == "s":
+#     file_name = "single_burst"
+# elif file_name == "d":
+#     file_name = "double_burst"
+# else:
+#     file_name = "plateau"
 
-        # for link in links:
-        #     if topology[link[0]][link[1]]["volTTL"] == 0:
-        #         topology[link[0]][link[1]]["volTTL"] = 1
+file_names = ["single_burst", "double_burst", "plateau"]
 
-        source, destination, vol, ttl = row
-        vol, ttl = int(vol), int(ttl)
-        shortest_path = nx.dijkstra_path(
-            topology, source, destination, weight=calc_weight
-        )
 
-        path_edges = []
-        while len(shortest_path) > 1:
-            src_node = shortest_path.pop(0)
-            path_edges.append([src_node, shortest_path[0]])
+def main():
+    for file_name in file_names:
+        with open(DATA_FOLDER + file_name + ".csv", newline="") as burst_file:
+            demands = csv.reader(burst_file)
+            network_demands = []
+            data_list = -1
 
-        network_demands.append([path_edges, vol, ttl])
-        for demand in network_demands:
-            demand[2] -= 1
-        network_demands = [demand for demand in network_demands if demand[2] > 0]
-        # print(len(network_demands))
+            for index, row in enumerate(demands):
+                for link in links:
+                    topology[link[0]][link[1]]["volTTL"] = 1
 
-        for demand in network_demands:
-            for edge in demand[0]:
-                if topology[edge[0]][edge[1]]["volTTL"] == 1:
-                    topology[edge[0]][edge[1]]["volTTL"] = demand[1] * demand[2]
-                else:
-                    topology[edge[0]][edge[1]]["volTTL"] += demand[1] * demand[2]
+                source, destination, vol, ttl = row
+                vol, ttl = int(vol), int(ttl)
+                shortest_path = nx.dijkstra_path(
+                    topology, source, destination, weight=calc_weight
+                )
 
-        if index % 60 == 0:
-            data_list += 1
-            with open(f"data\{file_name}\edge_list_{data_list}.txt", "w+") as file:
-                for node, data_dict in topology.adj.items():
-                    for nbr, length_dict in data_dict.items():
-                        data_line = " ".join(
-                            [
-                                str(node)[5::],
-                                str(nbr)[5::],
-                                str(topology[node][nbr]["volTTL"]),
-                            ]
-                        )
-                        file.write(f"{data_line}\n")
-            print(data_list)
+                path_edges = []
+                while len(shortest_path) > 1:
+                    src_node = shortest_path.pop(0)
+                    path_edges.append([src_node, shortest_path[0]])
+
+                network_demands.append([path_edges, vol, ttl])
+                for demand in network_demands:
+                    demand[2] -= 1
+                network_demands = [
+                    demand for demand in network_demands if demand[2] > 0
+                ]
+                # print(len(network_demands))
+
+                for demand in network_demands:
+                    for edge in demand[0]:
+                        if topology[edge[0]][edge[1]]["volTTL"] == 1:
+                            topology[edge[0]][edge[1]]["volTTL"] = demand[1] * demand[2]
+                        else:
+                            topology[edge[0]][edge[1]]["volTTL"] += (
+                                demand[1] * demand[2]
+                            )
+
+                if index % 60 == 0:
+                    data_list += 1
+                    with open(
+                        f"data\{file_name}\edge_list_{data_list}.txt", "w+"
+                    ) as file:
+                        for node, data_dict in topology.adj.items():
+                            for nbr, length_dict in data_dict.items():
+                                data_line = " ".join(
+                                    [
+                                        str(node)[5::],
+                                        str(nbr)[5::],
+                                        str(topology[node][nbr]["volTTL"]),
+                                    ]
+                                )
+                                file.write(f"{data_line}\n")
+                    print(data_list)
+
+
+if __name__ == "__main__":
+    main()
