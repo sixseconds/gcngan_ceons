@@ -85,9 +85,24 @@ def single_burst():
     single_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
     single_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
     single_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+
+    single_burst = [erlangs[val] for val in single_burst]
+    with open("../Test_Data/single_burst.csv", "w+") as test:
+        for load in single_burst:
+            with open(random.choice(files[load])) as erlCSV:
+                # requests = csv.reader(erlCSV)
+                requests = erlCSV.readlines()
+                rand_requests = random.sample(requests, 90)
+                for req in rand_requests:
+                    test.write(req)
     return single_burst
 
-print(single_burst())
+single_burst()
+
+
+
+
+
 
 
 double_burst = []
