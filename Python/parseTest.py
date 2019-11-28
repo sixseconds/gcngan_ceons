@@ -23,6 +23,7 @@ topology = nx.Graph()
 links = []
 
 LABEL_END = "_erlang"
+DATA_FOLDER = "../Test_Data/"
 
 with open("../Yml/topology.yml") as file:
     data = yaml.load(file, Loader=loader)
@@ -53,15 +54,24 @@ for index, link in enumerate(links):
 def calc_weight(source, destination, edge):
     return edge.get("volTTL") * edge.get("length")
 
-file_name = 'q'
+file_name = ''
 
 while file_name != 'q':
     file_name = input("Burst Pattern:\n(s - single burst, d - double burst, p - plateau)\n")
     if file_name == 's' or file_name == 'd' or file_name == 'p':
         break
+    else:
+        print('Please enter s, d, or p')
 
-with open("../Test_Data/single_burst.csv", newline="") as single_burst:
-    demands = csv.reader(single_burst)
+if file_name == 's':
+    file_name = 'single_burst'
+elif file_name == 'd':
+    file_name = 'double_burst'
+else:
+    file_name = 'plateau'
+
+with open(DATA_FOLDER + file_name + '.csv', newline="") as burst_file:
+    demands = csv.reader(burst_file)
     network_demands = []
     data_list = -1
     for index, row in enumerate(demands):
@@ -98,7 +108,7 @@ with open("../Test_Data/single_burst.csv", newline="") as single_burst:
 
         if index % 60 == 0:
             data_list += 1
-            with open(f"data\single_burst\edge_list_{data_list}.txt", "w+") as file:
+            with open(f"data\{file_name}\edge_list_{data_list}.txt", "w+") as file:
                 for node, data_dict in topology.adj.items():
                     for nbr, length_dict in data_dict.items():
                         data_line = " ".join(
