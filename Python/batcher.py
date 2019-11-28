@@ -29,8 +29,6 @@ with open("../Yml/topology.yml") as file:
     nodes = [node["name"] for node in data["nodes"]]
 
     topology.add_nodes_from(nodes)
-    # for node in nodes:
-    # topology.nodes[node]["volTTL"] = 0
 
     links = [key for key in list(data["links"].keys())]
 
@@ -69,8 +67,6 @@ erlangs.append(erlangs.pop(0))
 # 60 ticks per timeslice
 # 168 slices per week
 
-# Single burst batch
-
 
 def single_burst():
     single_burst = []
@@ -80,8 +76,7 @@ def single_burst():
     single_burst.extend(random.choices([3, 4, 5], weights=[1, 1, 2], k=14))
     single_burst.extend(random.choices([4, 5], weights=[1, 2], k=14))
     single_burst.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=14))
-    single_burst.extend(random.choices(
-        [1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
+    single_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
     single_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
 
     single_burst = [erlangs[val] for val in single_burst]
@@ -89,7 +84,6 @@ def single_burst():
     with open("../Test_Data/single_burst.csv", "w+") as test:
         for load in single_burst:
             with open(random.choice(files[load])) as erlCSV:
-                # requests = csv.reader(erlCSV)
                 requests = erlCSV.readlines()
                 rand_requests = random.sample(requests, 60)
                 for req in rand_requests:
@@ -105,17 +99,14 @@ def double_burst():
     double_burst.extend(random.choices([2, 3, 4], weights=[1, 1, 2], k=14))
     double_burst.extend(random.choices([4, 5, 6], weights=[1, 1, 2], k=7))
     double_burst.extend(random.choices([6, 7], weights=[1, 2], k=14))
-    double_burst.extend(random.choices(
-        [3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
-    double_burst.extend(random.choices(
-        [1, 2, 3, 4], weights=[3, 2, 1, 1], k=21))
+    double_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
+    double_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=21))
     double_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=21))
 
     double_burst = [erlangs[val] for val in double_burst]
     with open("../Test_Data/double_burst.csv", "w+") as test:
         for load in double_burst:
             with open(random.choice(files[load])) as erlCSV:
-                # requests = csv.reader(erlCSV)
                 requests = erlCSV.readlines()
                 rand_requests = random.sample(requests, 60)
                 for req in rand_requests:
@@ -138,7 +129,6 @@ def plateau():
     with open("../Test_Data/plateau.csv", "w+") as test:
         for load in plateau:
             with open(random.choice(files[load])) as erlCSV:
-                # requests = csv.reader(erlCSV)
                 requests = erlCSV.readlines()
                 rand_requests = random.sample(requests, 60)
                 for req in rand_requests:
