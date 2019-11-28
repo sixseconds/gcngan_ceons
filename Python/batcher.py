@@ -67,8 +67,26 @@ for item in TEST_PATH.iterdir():
                 files[f"{item.stem}"].append(demands)
 erlangs = list(files.keys())
 erlangs.append(erlangs.pop(0))
+# print(erlangs)
 
 # 60 * 24 * 7 = 10080 ticks per week
 # 60 ticks per timeslice
 # 168 slices per week
 
+# Single burst batch
+single_burst = []
+single_burst.extend(random.choices([0, 1], k=56))
+single_burst.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
+single_burst.extend(random.choices([2, 3, 4, 5], weights=[1, 1, 2, 3], k=7))
+single_burst.extend(random.choices([5, 6, 7], weights=[1, 1, 2], k=7))
+single_burst.extend(random.choices([6, 7], weights=[1, 2], k=7))
+single_burst.extend(random.choices([5, 6, 7], weights=[2, 1, 1], k=14))
+single_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
+single_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
+single_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+
+print(single_burst)
+
+
+double_burst = []
+plateau = []
