@@ -33,6 +33,7 @@ with open("../Yml/topology.yml") as file:
     topology.add_edges_from(links)
     for link in links:
         topology[link[0]][link[1]]["length"] = data["links"][link]["length"]
+        topology[link[0]][link[1]]["demands"] = []
 
     # adj = nx.adjacency_matrix(topology)
     # identity = np.identity(26)
