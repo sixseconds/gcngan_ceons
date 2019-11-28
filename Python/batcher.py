@@ -88,7 +88,7 @@ def single_burst():
             with open(random.choice(files[load])) as erlCSV:
                 # requests = csv.reader(erlCSV)
                 requests = erlCSV.readlines()
-                rand_requests = random.sample(requests, 90)
+                rand_requests = random.sample(requests, 60)
                 for req in rand_requests:
                     test.write(req)
     return single_burst
