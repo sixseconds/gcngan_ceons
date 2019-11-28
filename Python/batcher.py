@@ -50,11 +50,7 @@ for link in links:
 
 
 def calc_weight(source, destination, edge):
-    source_vol_ttl = topology.nodes[source].get("volTTL")
-    destination_vol_ttl = topology.nodes[destination].get("volTTL")
-    edge_length = edge.get("weight")
-
-    return (source_vol_ttl + destination_vol_ttl) * edge_length
+    return edge.get("volTTL") * edge.get("length")
 
 
 files = {}
