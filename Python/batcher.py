@@ -74,49 +74,52 @@ erlangs.append(erlangs.pop(0))
 # 168 slices per week
 
 # Single burst batch
+
+
 def single_burst():
     single_burst = []
     single_burst.extend(random.choices([0, 1], k=56))
-    single_burst.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
-    single_burst.extend(random.choices([2, 3, 4, 5], weights=[1, 1, 2, 3], k=7))
-    single_burst.extend(random.choices([5, 6, 7], weights=[1, 1, 2], k=7))
-    single_burst.extend(random.choices([6, 7], weights=[1, 2], k=7))
-    single_burst.extend(random.choices([5, 6, 7], weights=[2, 1, 1], k=14))
-    single_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
-    single_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
+    single_burst.extend(random.choices([1, 2], k=7))
+    single_burst.extend(random.choices([2, 3, 4], weights=[1, 1, 2, 3], k=7))
+    single_burst.extend(random.choices([3, 4, 5], weights=[1, 1, 2], k=14))
+    single_burst.extend(random.choices([4, 5], weights=[1, 2], k=14))
+    single_burst.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=14))
+    single_burst.extend(random.choices(
+        [1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
     single_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
 
     single_burst = [erlangs[val] for val in single_burst]
+
     with open("../Test_Data/single_burst.csv", "w+") as test:
         for load in single_burst:
             with open(random.choice(files[load])) as erlCSV:
                 # requests = csv.reader(erlCSV)
                 requests = erlCSV.readlines()
-                rand_requests = random.sample(requests, 90)
+                rand_requests = random.sample(requests, 60)
                 for req in rand_requests:
                     test.write(req)
     return single_burst
 
+
 single_burst()
 
 
-
-
-
-
-
 double_burst = []
+
+
 def double_burst():
     double_burst = []
     double_burst.extend(random.choices([0, 1], k=56))
     double_burst.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
-    double_burst.extend(random.choices([2, 3, 4, 5], weights=[1, 1, 2, 3], k=7))
-    double_burst.extend(random.choices([5, 6, 7], weights=[1, 1, 2], k=7))
-    double_burst.extend(random.choices([6, 7], weights=[1, 2], k=7))
-    double_burst.extend(random.choices([5, 6, 7], weights=[2, 1, 1], k=14))
-    double_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
-    double_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
-    double_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+    double_burst.extend(random.choices([3, 4, 5], weights=[1, 2, 3], k=14))
+    double_burst.extend(random.choices([2, 3, 4], weights=[1, 1, 2], k=14))
+    double_burst.extend(random.choices([4, 5, 6], weights=[1, 1, 2], k=7))
+    double_burst.extend(random.choices([6, 7], weights=[1, 2], k=14))
+    double_burst.extend(random.choices(
+        [3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
+    double_burst.extend(random.choices(
+        [1, 2, 3, 4], weights=[3, 2, 1, 1], k=21))
+    double_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=21))
 
     double_burst = [erlangs[val] for val in double_burst]
     with open("../Test_Data/double_burst.csv", "w+") as test:
@@ -124,23 +127,25 @@ def double_burst():
             with open(random.choice(files[load])) as erlCSV:
                 # requests = csv.reader(erlCSV)
                 requests = erlCSV.readlines()
-                rand_requests = random.sample(requests, 90)
+                rand_requests = random.sample(requests, 60)
                 for req in rand_requests:
                     test.write(req)
     return double_burst
 
+
 plateau = []
+
+
 def plateau():
     plateau = []
     plateau.extend(random.choices([0, 1], k=56))
-    plateau.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
-    plateau.extend(random.choices([2, 3, 4, 5], weights=[1, 1, 2, 3], k=7))
-    plateau.extend(random.choices([5, 6, 7], weights=[1, 1, 2], k=7))
-    plateau.extend(random.choices([6, 7], weights=[1, 2], k=7))
-    plateau.extend(random.choices([5, 6, 7], weights=[2, 1, 1], k=14))
-    plateau.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
-    plateau.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
-    plateau.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+    plateau.extend(random.choices([1, 2], k=7))
+    plateau.extend(random.choices([2, 3, 4], weights=[1, 1, 2, 3], k=7))
+    plateau.extend(random.choices([3, 4, 5], weights=[1, 1, 2], k=14))
+    plateau.extend(random.choices([4, 5], weights=[1, 2], k=42))
+    plateau.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=14))
+    plateau.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=14))
+    plateau.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=14))
 
     plateau = [erlangs[val] for val in plateau]
     with open("../Test_Data/plateau.csv", "w+") as test:
@@ -148,7 +153,7 @@ def plateau():
             with open(random.choice(files[load])) as erlCSV:
                 # requests = csv.reader(erlCSV)
                 requests = erlCSV.readlines()
-                rand_requests = random.sample(requests, 90)
+                rand_requests = random.sample(requests, 60)
                 for req in rand_requests:
                     test.write(req)
     return plateau
