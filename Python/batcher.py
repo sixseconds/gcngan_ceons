@@ -74,18 +74,20 @@ erlangs.append(erlangs.pop(0))
 # 168 slices per week
 
 # Single burst batch
-single_burst = []
-single_burst.extend(random.choices([0, 1], k=56))
-single_burst.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
-single_burst.extend(random.choices([2, 3, 4, 5], weights=[1, 1, 2, 3], k=7))
-single_burst.extend(random.choices([5, 6, 7], weights=[1, 1, 2], k=7))
-single_burst.extend(random.choices([6, 7], weights=[1, 2], k=7))
-single_burst.extend(random.choices([5, 6, 7], weights=[2, 1, 1], k=14))
-single_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
-single_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
-single_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+def single_burst():
+    single_burst = []
+    single_burst.extend(random.choices([0, 1], k=56))
+    single_burst.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
+    single_burst.extend(random.choices([2, 3, 4, 5], weights=[1, 1, 2, 3], k=7))
+    single_burst.extend(random.choices([5, 6, 7], weights=[1, 1, 2], k=7))
+    single_burst.extend(random.choices([6, 7], weights=[1, 2], k=7))
+    single_burst.extend(random.choices([5, 6, 7], weights=[2, 1, 1], k=14))
+    single_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
+    single_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
+    single_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+    return single_burst
 
-print(single_burst)
+print(single_burst())
 
 
 double_burst = []
