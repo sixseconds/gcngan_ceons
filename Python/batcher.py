@@ -106,4 +106,49 @@ single_burst()
 
 
 double_burst = []
+def double_burst():
+    double_burst = []
+    double_burst.extend(random.choices([0, 1], k=56))
+    double_burst.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
+    double_burst.extend(random.choices([2, 3, 4, 5], weights=[1, 1, 2, 3], k=7))
+    double_burst.extend(random.choices([5, 6, 7], weights=[1, 1, 2], k=7))
+    double_burst.extend(random.choices([6, 7], weights=[1, 2], k=7))
+    double_burst.extend(random.choices([5, 6, 7], weights=[2, 1, 1], k=14))
+    double_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
+    double_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
+    double_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+
+    double_burst = [erlangs[val] for val in double_burst]
+    with open("../Test_Data/double_burst.csv", "w+") as test:
+        for load in double_burst:
+            with open(random.choice(files[load])) as erlCSV:
+                # requests = csv.reader(erlCSV)
+                requests = erlCSV.readlines()
+                rand_requests = random.sample(requests, 90)
+                for req in rand_requests:
+                    test.write(req)
+    return double_burst
+
 plateau = []
+def plateau():
+    plateau = []
+    plateau.extend(random.choices([0, 1], k=56))
+    plateau.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
+    plateau.extend(random.choices([2, 3, 4, 5], weights=[1, 1, 2, 3], k=7))
+    plateau.extend(random.choices([5, 6, 7], weights=[1, 1, 2], k=7))
+    plateau.extend(random.choices([6, 7], weights=[1, 2], k=7))
+    plateau.extend(random.choices([5, 6, 7], weights=[2, 1, 1], k=14))
+    plateau.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
+    plateau.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
+    plateau.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+
+    plateau = [erlangs[val] for val in plateau]
+    with open("../Test_Data/plateau.csv", "w+") as test:
+        for load in plateau:
+            with open(random.choice(files[load])) as erlCSV:
+                # requests = csv.reader(erlCSV)
+                requests = erlCSV.readlines()
+                rand_requests = random.sample(requests, 90)
+                for req in rand_requests:
+                    test.write(req)
+    return plateau
