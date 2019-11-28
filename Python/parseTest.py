@@ -53,6 +53,12 @@ for index, link in enumerate(links):
 def calc_weight(source, destination, edge):
     return edge.get("volTTL") * edge.get("length")
 
+file_name = 'q'
+
+while file_name != 'q':
+    file_name = input("Burst Pattern:\n(s - single burst, d - double burst, p - plateau)\n")
+    if file_name == 's' or file_name == 'd' or file_name == 'p':
+        break
 
 with open("../Test_Data/single_burst.csv", newline="") as single_burst:
     demands = csv.reader(single_burst)

@@ -76,7 +76,7 @@ def single_burst():
     single_burst = []
     single_burst.extend(random.choices([0, 1], k=56))
     single_burst.extend(random.choices([1, 2], k=7))
-    single_burst.extend(random.choices([2, 3, 4], weights=[1, 1, 2, 3], k=7))
+    single_burst.extend(random.choices([2, 3, 4], weights=[1, 2, 3], k=7))
     single_burst.extend(random.choices([3, 4, 5], weights=[1, 1, 2], k=14))
     single_burst.extend(random.choices([4, 5], weights=[1, 2], k=14))
     single_burst.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=14))
@@ -95,12 +95,6 @@ def single_burst():
                 for req in rand_requests:
                     test.write(req)
     return single_burst
-
-
-single_burst()
-
-
-double_burst = []
 
 
 def double_burst():
@@ -129,14 +123,11 @@ def double_burst():
     return double_burst
 
 
-plateau = []
-
-
 def plateau():
     plateau = []
     plateau.extend(random.choices([0, 1], k=56))
     plateau.extend(random.choices([1, 2], k=7))
-    plateau.extend(random.choices([2, 3, 4], weights=[1, 1, 2, 3], k=7))
+    plateau.extend(random.choices([2, 3, 4], weights=[1, 2, 3], k=7))
     plateau.extend(random.choices([3, 4, 5], weights=[1, 1, 2], k=14))
     plateau.extend(random.choices([4, 5], weights=[1, 2], k=42))
     plateau.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=14))
@@ -153,3 +144,8 @@ def plateau():
                 for req in rand_requests:
                     test.write(req)
     return plateau
+
+
+single_burst()
+double_burst()
+plateau()
