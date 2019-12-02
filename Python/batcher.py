@@ -77,7 +77,7 @@ def single_burst():
     single_burst.extend(random.choices([4, 5], weights=[1, 2], k=14))
     single_burst.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=14))
     single_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=28))
-    single_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=28))
+    single_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=29))
 
     single_burst = [erlangs[val] for val in single_burst]
 
@@ -101,7 +101,7 @@ def double_burst():
     double_burst.extend(random.choices([6, 7], weights=[1, 2], k=14))
     double_burst.extend(random.choices([3, 4, 5, 6], weights=[3, 2, 1, 1], k=14))
     double_burst.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=21))
-    double_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=21))
+    double_burst.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=22))
 
     double_burst = [erlangs[val] for val in double_burst]
     with open("../Test_Data/double_burst.csv", "w+") as test:
@@ -123,7 +123,7 @@ def plateau():
     plateau.extend(random.choices([4, 5], weights=[1, 2], k=42))
     plateau.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=14))
     plateau.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=14))
-    plateau.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=14))
+    plateau.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=15))
 
     plateau = [erlangs[val] for val in plateau]
     with open("../Test_Data/plateau.csv", "w+") as test:
