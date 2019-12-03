@@ -116,14 +116,14 @@ def double_burst():
 
 def plateau():
     plateau = []
-    plateau.extend(random.choices([0, 1], k=56))
-    plateau.extend(random.choices([1, 2], k=7))
-    plateau.extend(random.choices([2, 3, 4], weights=[1, 2, 3], k=7))
-    plateau.extend(random.choices([3, 4, 5], weights=[1, 1, 2], k=14))
-    plateau.extend(random.choices([4, 5], weights=[1, 2], k=42))
-    plateau.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=14))
-    plateau.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=14))
-    plateau.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=15))
+    plateau.extend(random.choices([0, 1], k=21))
+    plateau.extend(random.choices([1, 2], k=21))
+    plateau.extend(random.choices([2, 3, 4], weights=[1, 2, 3], k=21))
+    plateau.extend(random.choices([3, 4, 5], weights=[1, 1, 2], k=21))
+    plateau.extend(random.choices([4, 5], weights=[1, 2], k=21))
+    plateau.extend(random.choices([3, 4, 5], weights=[2, 1, 1], k=21))
+    plateau.extend(random.choices([1, 2, 3, 4], weights=[3, 2, 1, 1], k=21))
+    plateau.extend(random.choices([0, 1, 2], weights=[3, 2, 1], k=22))
 
     plateau = [erlangs[val] for val in plateau]
     with open("../Test_Data/plateau.csv", "w+") as test:
