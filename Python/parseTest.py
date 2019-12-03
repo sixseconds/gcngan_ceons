@@ -16,6 +16,7 @@ import random
 
 import csv
 import yaml
+import batcher
 
 loader = yaml.Loader
 
@@ -48,30 +49,20 @@ for index, link in enumerate(links):
 def calc_weight(source, destination, edge):
     return edge.get("volTTL") * edge.get("length")
 
-
-# file_name = ""
-
-# while file_name != "q":
-#     file_name = input(
-#         "Burst Pattern:\n(s - single burst, d - double burst, p - plateau)\n"
-#     )
-#     if file_name == "s" or file_name == "d" or file_name == "p":
-#         break
-#     else:
-#         print("Please enter s, d, or p")
-
-# if file_name == "s":
-#     file_name = "single_burst"
-# elif file_name == "d":
-#     file_name = "double_burst"
-# else:
-#     file_name = "plateau"
-
 file_names = ["single_burst", "double_burst", "plateau"]
 
 
 def main():
+    batcher.single_burst()
+    batcher.double_burst()
+    batcher.plateau()
     for file_name in file_names:
+        print('parsing ' + file_name)
+        target_dir = './data/' + file_name
+        subdirectories = [name for name in os.listdir(target_dir)
+            if os.path.isdir(os.path.join(target_dir, name))]
+        batch_num = int(subdirectories[-1][-1]) + 1
+        os.mkdir(f"{target_dir}/batch{batch_num}")
         with open(DATA_FOLDER + file_name + ".csv", newline="") as burst_file:
             demands = csv.reader(burst_file)
             network_demands = []
@@ -112,7 +103,7 @@ def main():
                 if index % 60 == 0:
                     data_list += 1
                     with open(
-                        f"data\{file_name}\edge_list_{data_list}.txt", "w+"
+                        f"data\{file_name}\\batch{batch_num}\edge_list_{data_list}.txt", "w+"
                     ) as file:
                         for node, data_dict in topology.adj.items():
                             for nbr, length_dict in data_dict.items():
@@ -124,7 +115,7 @@ def main():
                                     ]
                                 )
                                 file.write(f"{data_line}\n")
-                    print(data_list)
+                    # print(data_list)
 
 
 if __name__ == "__main__":

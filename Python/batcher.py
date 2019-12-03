@@ -69,6 +69,7 @@ erlangs.append(erlangs.pop(0))
 
 
 def single_burst():
+    print('batching single_burst')
     single_burst = []
     single_burst.extend(random.choices([0, 1], k=56))
     single_burst.extend(random.choices([1, 2], k=7))
@@ -92,6 +93,7 @@ def single_burst():
 
 
 def double_burst():
+    print('batching double_burst')
     double_burst = []
     double_burst.extend(random.choices([0, 1], k=56))
     double_burst.extend(random.choices([1, 2, 3], weights=[1, 1, 2], k=7))
@@ -115,6 +117,7 @@ def double_burst():
 
 
 def plateau():
+    print('batching plateau')
     plateau = []
     plateau.extend(random.choices([0, 1], k=21))
     plateau.extend(random.choices([1, 2], k=21))
@@ -135,7 +138,10 @@ def plateau():
                     test.write(req)
     return plateau
 
+def main(): 
+    single_burst()
+    double_burst()
+    plateau()
 
-single_burst()
-double_burst()
-plateau()
+if __name__ == "__main__":
+    main()
