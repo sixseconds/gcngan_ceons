@@ -139,10 +139,11 @@ def plateau():
     return plateau
 
 def bigBatch():
+    weeks = 12
+    
     big_batch = []
     func_names = [single_burst, double_burst, plateau]
     
-    weeks = 12
     for i in range(weeks):
         print('Batch ' + str(i+1) + '/' + str(weeks))
         big_batch.extend(func_names[random.randint(0, 2)]())
@@ -158,9 +159,9 @@ def bigBatch():
     return big_batch
 
 def main(): 
-    # single_burst()
-    # double_burst()
-    # plateau()
+    single_burst()
+    double_burst()
+    plateau()
     bigBatch()
 
 if __name__ == "__main__":

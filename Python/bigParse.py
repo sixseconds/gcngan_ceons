@@ -100,8 +100,7 @@ def main():
                 for demand in network_demands:
                     for edge in demand[0]:
                         if topology[edge[0]][edge[1]]["volTTL"] == 1:
-                            topology[edge[0]][edge[1]
-                                              ]["volTTL"] = demand[1] * demand[2]
+                            topology[edge[0]][edge[1]]["volTTL"] = demand[1] * demand[2]
                         else:
                             topology[edge[0]][edge[1]]["volTTL"] += (
                                 demand[1] * demand[2]
