@@ -138,10 +138,30 @@ def plateau():
                     test.write(req)
     return plateau
 
+def bigBatch():
+    big_batch = []
+    func_names = [single_burst, double_burst, plateau]
+    
+    weeks = 12
+    for i in range(weeks):
+        print('Batch ' + str(i+1) + '/' + str(weeks))
+        big_batch.extend(func_names[random.randint(0, 2)]())
+
+    print('writing to batch file')
+    with open("../Test_Data/bigBatch.csv", "w+") as test:
+        for load in big_batch:
+            with open(random.choice(files[load])) as erlCSV:
+                requests = erlCSV.readlines()
+                rand_requests = random.sample(requests, 60)
+                for req in rand_requests:
+                    test.write(req)
+    return big_batch
+
 def main(): 
-    single_burst()
-    double_burst()
-    plateau()
+    # single_burst()
+    # double_burst()
+    # plateau()
+    bigBatch()
 
 if __name__ == "__main__":
     main()
