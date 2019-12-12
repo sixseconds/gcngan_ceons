@@ -3,6 +3,7 @@
 import json
 import os
 import sys
+import matplotlib.pyplot as plt # we will use this for plotting
 
 
 with open(f"../Test_Data/From_Liam/REAL-DATA-1/US26_2019_11_14_16_22_52_demands.json") as file:
